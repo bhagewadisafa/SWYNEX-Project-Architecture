@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusDesk — Student Service Request & Grievance Redressal Portal</title>
+  <meta name="description" content="CampusDesk is a 3-tier full-stack student service request and issue tracking portal built for SWYNEX Technologies Internship Task 1.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <div class="brand">
+        <div class="brand-icon">CD</div>
+        <div>
+          <span class="brand-title">CampusDesk</span>
+          <span class="brand-badge">SWYNEX Task 1</span>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">MCA Internship Architecture</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Auth Container -->
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Welcome to CampusDesk</h2>
+        <p>Student Service Request & Issue Redressal Portal</p>
+      </div>
+
+      <!-- Tab Switcher -->
+      <div class="tabs">
+        <button type="button" class="tab-btn active" id="tab-login">Sign In</button>
+        <button type="button" class="tab-btn" id="tab-register">Create Account</button>
+      </div>
+
+      <!-- Feedback Toast / Alert -->
+      <div id="auth-message" style="display: none; margin-bottom: 1.25rem;"></div>
+
+      <!-- Sign In Form -->
+      <form id="form-login">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Campus Email Address</label>
+          <input 
+            type="email" 
+            id="login-email" 
+            class="form-control" 
+            placeholder="e.g. rahul.mca@college.edu" 
+            value="rahul.mca@college.edu"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input 
+            type="password" 
+            id="login-password" 
+            class="form-control" 
+            placeholder="••••••••" 
+            value="Password@123"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+        <p style="text-align: center; font-size: 0.8rem; color: var(--text-faint); margin-top: 1rem;">
+          Quick Demo: Click <strong>Sign In</strong> directly with prefilled credentials to view the dashboard.
+        </p>
+      </form>
+
+      <!-- Registration Form -->
+      <form id="form-register" style="display: none;">
+        <div class="form-group">
+          <label class="form-label" for="reg-name">Full Name</label>
+          <input 
+            type="text" 
+            id="reg-name" 
+            class="form-control" 
+            placeholder="e.g. Rahul Sharma" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Campus Email</label>
+          <input 
+            type="email" 
+            id="reg-email" 
+            class="form-control" 
+            placeholder="e.g. rahul.mca@college.edu" 
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-password">Password</label>
+          <input 
+            type="password" 
+            id="reg-password" 
+            class="form-control" 
+            placeholder="At least 6 characters" 
+            required
+            minlength="6"
+          >
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-dept">Academic Department</label>
+          <select id="reg-dept" class="form-control">
+            <option value="Computer Applications">Computer Applications (MCA)</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Administration">Administration & Accounts</option>
+            <option value="General">General / Library</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-role">Portal Role</label>
+          <select id="reg-role" class="form-control">
+            <option value="student">Student (Submit & Track Requests)</option>
+            <option value="admin">Administrator / Faculty (Manage & Resolve)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-roll">Roll / Registration Number (Optional)</label>
+          <input 
+            type="text" 
+            id="reg-roll" 
+            class="form-control" 
+            placeholder="e.g. MCA-2025-042"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+
+    </div>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

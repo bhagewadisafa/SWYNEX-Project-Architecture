@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — CampusDesk</title>
+  <meta name="description" content="CampusDesk Student & Admin Service Request Dashboard.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-wrapper">
+      <div class="brand">
+        <a href="dashboard.html" style="text-decoration: none; display: flex; align-items: center; gap: 0.75rem;">
+          <div class="brand-icon">CD</div>
+          <div>
+            <span class="brand-title">CampusDesk</span>
+            <span class="brand-badge">Dashboard</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <div class="user-chip">
+          <div class="user-avatar" id="user-avatar">R</div>
+          <span id="user-name" style="font-weight: 500;">Rahul Sharma</span>
+          <span class="badge badge-category" id="user-role-badge">STUDENT</span>
+        </div>
+        <button id="btn-logout" class="btn btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.825rem;">
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Notice Banner (hidden by default) -->
+  <div id="admin-banner" style="display: none; background: rgba(79, 70, 229, 0.2); border-bottom: 1px solid var(--primary); padding: 0.6rem 0; text-align: center; font-size: 0.85rem;">
+    🛡️ <strong>Administrator Mode Active:</strong> You have elevated permissions to review, triage, and update ticket statuses.
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="container">
+    
+    <!-- Summary Metrics Grid -->
+    <section class="stats-grid" aria-label="Request Metrics">
+      <div class="stat-card total">
+        <div>
+          <div class="stat-label">Total Requests</div>
+          <div class="stat-value" id="stat-total">3</div>
+        </div>
+        <div class="stat-icon">📋</div>
+      </div>
+
+      <div class="stat-card pending">
+        <div>
+          <div class="stat-label">Pending Review</div>
+          <div class="stat-value" id="stat-pending">1</div>
+        </div>
+        <div class="stat-icon">⏳</div>
+      </div>
+
+      <div class="stat-card in-progress">
+        <div>
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="stat-progress">1</div>
+        </div>
+        <div class="stat-icon">⚙️</div>
+      </div>
+
+      <div class="stat-card resolved">
+        <div>
+          <div class="stat-label">Resolved Issues</div>
+          <div class="stat-value" id="stat-resolved">1</div>
+        </div>
+        <div class="stat-icon">✅</div>
+      </div>
+    </section>
+
+    <!-- Filter & Search Bar -->
+    <section class="filter-bar">
+      <div class="filter-pills" role="tablist">
+        <button type="button" class="pill-btn active" data-filter="All">All Tickets</button>
+        <button type="button" class="pill-btn" data-filter="Pending">Pending</button>
+        <button type="button" class="pill-btn" data-filter="In Progress">In Progress</button>
+        <button type="button" class="pill-btn" data-filter="Resolved">Resolved</button>
+      </div>
+
+      <div class="filter-actions">
+        <input 
+          type="text" 
+          id="search-input" 
+          class="form-control" 
+          placeholder="Search requests..." 
+          style="width: 200px; padding: 0.45rem 0.75rem; font-size: 0.85rem;"
+        >
+        <button id="btn-open-modal" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">
+          + New Request
+        </button>
+      </div>
+    </section>
+
+    <!-- Requests Cards Grid -->
+    <section>
+      <div class="requests-grid" id="requests-grid">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal for Creating New Service Request -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Submit Service Request</h3>
+        <button type="button" class="btn-close" id="btn-close-modal">&times;</button>
+      </div>
+
+      <form id="form-new-request">
+        <div class="form-group">
+          <label class="form-label" for="req-title">Request Title</label>
+          <input 
+            type="text" 
+            id="req-title" 
+            class="form-control" 
+            placeholder="Brief summary of the issue or requirement" 
+            required
+            minlength="5"
+          >
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="req-category">Department / Category</label>
+            <select id="req-category" class="form-control" required>
+              <option value="IT & Lab Facilities">IT & Lab Facilities</option>
+              <option value="Academic">Academic</option>
+              <option value="Administrative">Administrative</option>
+              <option value="Library">Library</option>
+              <option value="Hostel & Infrastructure">Hostel & Infrastructure</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="req-priority">Priority Level</label>
+            <select id="req-priority" class="form-control">
+              <option value="Low">Low</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="High">High</option>
+              <option value="Urgent">Urgent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="req-description">Detailed Description</label>
+          <textarea 
+            id="req-description" 
+            class="form-control" 
+            placeholder="Provide specific details (location, lab room, subject, roll no, etc.)" 
+            required
+            minlength="10"
+          ></textarea>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
